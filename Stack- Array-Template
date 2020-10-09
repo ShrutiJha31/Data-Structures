@@ -1,0 +1,107 @@
+#include<bitz/stdc++.h>
+using namespace std;
+
+
+template<class T>
+class Stack
+{
+private:
+  T *s;
+  int top;
+  int size;
+public:
+   Stack(int size)
+   {
+     this->size=size;
+     top=-1;
+     st=new T[this->size];
+   }
+   
+    void push(T x);
+    T pop();
+    T peek(int index);
+    void Display();
+ };
+ 
+ template<class T>
+ void Stack<T>::push(T x)
+ {
+     if(isFull())
+     cout<<"Stack is full";
+     else
+     {
+        top++;
+        s[top]=x;
+      }
+      
+}      
+        
+template<class T>
+ T Stack<T>::pop()
+ {   
+      T x=-1;
+     if(isEmpty())
+     cout<<"Stack is empty";
+     else
+     {
+        x=st[top];
+        top--;
+      }
+     return x; 
+      
+}          
+
+template<class T>
+ T Stack<T>::peep(int index)
+ {   
+      T x=-1;
+      if(top-index+1<0)
+      {
+      cout<<"Invalid Index";
+      }
+      else
+      {
+      x = s[top-index+1];
+      }
+     return x; 
+      
+}  
+
+template<class T>
+ void Stack<T>::Display()
+ {   
+    
+     if(isEmpty())
+     cout<<"Stack is empty";
+     else
+     {
+       for(int i=top;i>=0;i--)
+       cout<<s[i]<<endl;
+      }
+ 
+ 
+}          
+     
+  
+int main()
+{
+cout<<"Enter the size of the stack"<<endl;
+int size;
+cin>>size;
+ Stack<char> st(size);
+
+for(int i=0;i<size;i++)
+{
+cout<<"Enter the charachter you want to push";
+char ch;
+cin>>ch;
+st.push(ch);
+}
+
+ st.Display();
+
+ cout<<st.peek(1)<<endl;
+cout<<st.pop()<<endl;
+
+ return 0;
+}
