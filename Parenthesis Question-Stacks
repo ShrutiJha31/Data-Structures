@@ -1,0 +1,86 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+struct Node
+{
+   char data;
+   struct Node *next;
+}*top=NULL;
+
+void push(char x)
+{
+    struct Node *t;
+    t=(struct Node*)malloc(sizeof(struct Node));
+    
+
+     t->data=x;
+     t->next=top;
+     top=t;
+         
+  }  
+  
+  int pop()
+  {
+       int x=-1;
+       struct Node *t;
+       if (top==NULL)
+          printf("Stack is Empty");
+       else
+         {
+         t=top;
+         x=t->data;
+         top=t->next;
+         free(t);
+         }
+       return x;
+  }   
+  
+  
+  void Display()
+  {
+      struct Node *p;
+      p=top;
+      while(p!=NULL)
+      {
+     cout<<p->data;
+      p=p->next;
+      }
+      
+   }   
+        
+int main()
+{
+    cout<<"Enter Expression";
+string str;
+cin>>str;
+struct Node *t;int k=0;
+for(int i=0;i<str.length();i++)
+{
+    if(str[i]=='('||str[i]=='['||str[i]=='{')
+    push(str[i]);
+  
+    else if(str[i]==')'||str[i]==']'||str[i]=='}')
+    {
+        t=top;
+        if(str[i]==')')
+        str[i]='(';
+        else if(str[i]=='}')
+        str[i]='{';
+        else
+        str[i]='[';
+        
+        if(t->data==str[i])
+        pop();
+        else
+        {
+            k=1;
+            break;
+        }
+    }
+}
+  
+if(k==0)
+cout<<"Correct Expression";
+else
+cout<<"Incorrect Expression";
+}
