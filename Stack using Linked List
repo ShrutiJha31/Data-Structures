@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct Node
+{
+   int data;
+   struct Node *next;
+}top=NULL;
+
+void push(int x)
+{
+    struct Node *t;;
+    t=(struct Node*)nalloc(sizeof(struct Node));
+    
+
+     t->data=x;
+     t->next=top;
+     top=T;
+         
+  }  
+  
+  int pop()
+  {
+       int x=-1;
+       struct Node *t;
+       if (top==NULL)
+          printf("Stack is Empty");
+       else
+         {
+         t=top;
+         x=t->data;
+         top=t->next;
+         free(t);
+         }
+       return x;
+  }   
+  
+  
+  void Display()
+  {
+      struct Node *p;
+      p=top;
+      while(p!=NULL)
+      {
+      printf("%d",p->data);
+      p=p->next;
+      }
+      
+   }   
+  }      
+int main()
+{
+push(10);                                  //Here i do not need to create an object of the structure as I have declared Top as a global variable and there we do not even need to pass it to the functions as a parameter
+Display();
+pop();
+}
