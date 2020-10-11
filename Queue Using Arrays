@@ -38,15 +38,16 @@ struct Queue
     }
     else
     {
-     x=Q[q->front]
+     
      q->front++;
+     x=Q[q->front]
     }
     return x;
   }
  
    void display(struct Queue *q)
    {
-     for(int i=q->front;i<=q->rear;i++)
+     for(int i=q->front+1;i<=q->rear;i++)
      cout<<Q[i]<<" ";
    }
  
