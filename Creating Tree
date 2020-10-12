@@ -1,0 +1,95 @@
+#include<bits/stdc++/h>
+using namespace std;
+class Node
+{
+   public:
+     Node *lchild;
+     int dat;
+     Node *rchild;
+ };
+ 
+ class Queue
+ {
+    private:  
+      int front;
+      int rear;
+      int size;
+      Node **Q;   //in queue we were pointing to an array, here we are pointing to a node
+   public:
+       Queue(int size)
+       {
+       this->size=size;
+       front=rear=-1;
+       Q=new Node*[this->size];
+       }
+       void enqueue(Node* x);
+       Node* dequeue();
+       void Display();
+ } 
+ 
+ class Tree
+ {
+     public:
+       Node *root;
+       Tree()
+       {
+         root=NULL;
+       }
+       void CreateTree();
+       void Preorder(Node *p);
+       void Postorder(Node *p);
+       void Inorder(Node *p);
+       void Levelorder(Node *p);
+       void Height(Node *root);
+ };
+ void create(struct Queue *q,int size)
+ {
+   q->size=size;
+   q->fron=q->rear=-1;
+   q->Q=(int *)malloc(q->size*sizeof(int));
+  } 
+  
+  void enqueue(struct Queue *q,int x)
+  {
+    if(q->rear==q->size-1)
+    {
+    cout<<"Queue is Full!";
+    }
+    else
+    {
+      q->rear++;
+      Q[q->rear]=x;
+    }
+  }
+  
+   void dequeue(struct Queue *q)
+  {
+    int x=-1;
+    if(q->rear==q->front)
+    {
+    cout<<"Queue is Empty!";
+    }
+    else
+    {
+     
+     q->front++;
+     x=Q[q->front]
+    }
+    return x;
+  }
+ 
+   void display(struct Queue *q)
+   {
+     for(int i=q->front+1;i<=q->rear;i++)
+     cout<<Q[i]<<" ";
+   }
+ 
+ int main()
+ {
+    struct Queue q;
+    int size;
+    cout<<"Enter size";
+    cin>>size;
+    create(&q,size);
+    
+  }  
