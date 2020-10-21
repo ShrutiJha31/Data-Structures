@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-#include "Queetree.h"
+#include "Queuetree.h"
 
 class Tree
 {
