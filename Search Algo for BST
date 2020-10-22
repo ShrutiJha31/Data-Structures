@@ -1,0 +1,13 @@
+Node* Search(Node *t,int key)
+{
+    if(t!=Null)
+    {
+     if(t->data->key)
+     return t;
+     else if(t->data<key)
+     Search(t->rchild,key);
+     else
+     Search(t->lchinld,key);
+    }
+    return Null;
+}    
