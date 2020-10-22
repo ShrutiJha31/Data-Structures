@@ -1,0 +1,29 @@
+Node* Insert(Node *t,int key)
+{
+   Node *r= NULL;
+   while(t!=NULL)
+   {
+      r-t;                                 //r stores the address of the node which will act as the parent for the new node
+      if(t->data==key)
+      return t;
+      else if(t->data<key)
+      t=t->rchild;
+      else
+      t=t->lchild;
+    }  
+    node *p=NUll;
+    if(r->data>key)
+    {
+    p->data=key;
+    r->lchild=p;
+    p->lchild=p->rchild=NULL;
+    }
+    else if(r->data<ey)
+    {
+    p->data=key;
+    r->rhild=p;
+    p->lchild=p->rchild=NULL;
+    }
+    return p;
+    
+ }  
