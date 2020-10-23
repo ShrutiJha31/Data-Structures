@@ -20,15 +20,14 @@ struct Node *Insert(struct Node *p,int key)
       t->lchild=t->rchild=NULL;
       return t;
   }
-  else
-  {
+
       if(p->data>key)
       {
           p->lchild=Insert(p->lchild,key);
       }
-      else 
+      else if(p->data<key) 
       p->rchild=Insert(p->rchild,key);
-  }
+     return p;
  
     
 }
