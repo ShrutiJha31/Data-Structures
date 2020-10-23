@@ -1,0 +1,112 @@
+#include<bits/stdc++.h>
+using namespace std;
+  
+  
+struct Node
+{
+    struct Node *lchild;
+    struct Node *rchild;
+    int data;
+};
+
+
+struct Node *Insert(struct Node *p,int key)
+{
+    struct Node *t;
+  if(p==NULL)
+  {
+      t=(struct Node *)malloc(sizeof(struct Node));
+      t->data=key;
+      t->lchild=t->rchild=NULL;
+      return t;
+  }
+  else
+  {
+      if(p->data>key)
+      {
+          p->lchild=Insert(p->lchild,key);
+      }
+      else 
+      p->rchild=Insert(p->rchild,key);
+  }
+ 
+    
+}
+
+void Preorder(struct Node *p)
+{
+    cout<<p->data;
+    Preorder(p->lchild);
+    Preorder(p->rchild);
+}
+
+
+
+void *Inorder(struct Node *p)
+{
+    Inorder(p->lchild);
+    cout<<p->data;
+   
+    Inorder(p->rchild);
+}
+
+
+
+void *Postorder(struct Node *p)
+{
+    Postorder(p->lchild);
+     
+    Postorder(p->rchild);
+    cout<<p->data;
+  
+}
+
+
+
+
+struct Node *Search(struct Node *p,int key)
+{
+    
+  if(p->data==key)
+  return p;
+      else if(p->data>key)
+      {
+          Search(p->lchild,key);
+      }
+      else 
+           Search(p->rchild,key);
+  
+     return NULL;
+    
+}
+
+
+struct Node Inpre(struct Node *p)               //InorderPredessor
+{
+     if(p&&p->lchild!=NULL)
+     p=p->lchild;
+     return p;
+     
+}
+
+struct Node Insuc(struct Node *p)             //InorderSuccesor
+{
+     if(p&&p->rchild!=NULL)
+     p=p->rchild;
+     return p;
+     
+}
+
+
+int height(struct Node *p)
+{
+    int x,y;
+    if(p==NULL)
+    return 0;
+    x=height(p->lchild);
+    y=height(p->rchild);
+    return max(x,y)+1;
+}
+
+
+
