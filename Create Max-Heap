@@ -35,8 +35,9 @@ void DeleteRoot(int A[],int n)
        else
        break;
 }
-}
 
+}
+A[n]=x;
 void createHeap()
 {
    cout<<"Enter the number elements";
