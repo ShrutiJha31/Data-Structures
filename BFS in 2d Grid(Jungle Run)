@@ -1,0 +1,153 @@
+#include<bits/stdc++.h>
+ 
+using namespace std;
+ 
+#define ll long long 
+#define scn(n) scanf("%d",&n)
+#define lscn(n) scanf("%lld",&n)
+#define lpri(n) printf("%lld",n)
+#define pri(n) printf("%d",n)
+#define pln() printf("\n")
+#define priln(n) printf("%d\n",n)
+#define lpriln(n) printf("%lld\n",n)
+#define fr(i,init,n) for(int i=init;i<n;i++)
+#define pb push_back     
+#define mp make_pair
+#define F first
+#define S second
+#define gcd __gcd
+#define inf INT_MAX
+#define ninf INT_MIN
+#define f(v,value) find(v.begin(),v.end(),value)
+#define asc(a,n) sort(a,a+n)
+#define desc(a,n,data_type) sort(a,a+n,greater<data_type>())
+#define vasc(v)  sort(v.begin(),v.end())
+#define vdesc(v,data_type) sort(v.begin(),v.end(),greater<data_type>())
+const int mod = 1e9 + 7;         
+const int N = 1e5 + 4;
+ 
+int nooffac(long long a)
+{
+int c=0;
+for(int i=1;i*i<=a;i++)
+{
+if(a%i==0)
+{
+c++;
+if(a/i!=i)
+c++;
+}
+return c;
+}
+}
+ 
+ll check(ll val)
+{
+    ll k2=val;ll t=0;ll sum=0;
+    val=val-val%5;
+    while(k2>0)
+    { 
+        k2=k2/5;
+         t++;
+        //cout<<"k2"<<k2;
+    }
+    t--;//cout<<t<<" ";
+     ll k1=pow(5,t);
+     //cout<<k1;
+    while(k1>=5)
+    {
+        
+    
+        
+        sum+=val/k1;
+ 
+        k1=k1/5;
+        //cout<<sum<<"@ "<<k1;
+        
+    }
+    //cout<<val<<"sum"<<sum<<" ";
+    return sum;
+}
+ 
+ll bi_search(ll k)
+{
+    ll low=0;
+    ll high=1e12;
+    ll pos;
+    while(high>low)
+    {
+        
+        ll mid=(low+high)/2;
+        //cout<<"mid"<<mid<<" ";
+        if(check(mid)>=k)
+        {
+            pos=mid; //cout<<pos<<" ";
+            high=mid-1;
+        }
+        else
+        low=mid+1;
+    }
+   return pos;
+}
+
+
+int main()
+{
+  ll n;
+  lscn(n);ll srcx=0;ll srcy=0;
+char v[n+1][n+1];
+ll vis[n+1][n+1];
+  fr(i,0,n)
+  {
+	  fr(j,0,n)
+	  {
+		  vis[i][j]=0;
+		  
+		  cin>>v[i][j];
+		  if(v[i][j]=='S')
+		  {
+			  srcx=i;
+			  srcy=j;
+		  }
+	  }
+
+
+  } 
+  queue<pair<ll,ll>>q,q1;;
+  q.push(mp(srcx,srcy));
+  vis[srcx][srcy]=1;ll dis[n+1][n+1];
+  dis[srcx][srcy]=0;
+  int dx[]={0,1,0,-1};
+  int dy[]={1,0,-1,0};ll c=0;ll k=0;
+  while(!q.empty())
+  {
+	  ll curx=q.front().first;
+	  ll cury=q.front().second;
+      q.pop();
+	  for(int i=0;i<4;i++)
+	  {
+       ll newx=curx+dx[i];
+	   ll newy=cury+dy[i];		  
+      if(newx>=0&&newy>=0&&newx<=n-1&&newy<=n-1&&vis[newx][newy]!=1&&v[newx][newy]!='T')
+	  {
+           vis[newx][newy]=1;
+           dis[newx][newy]=dis[curx][cury]+1;
+		   if(v[newx][newy]=='E')
+		   {
+			   k=1;
+                cout<<dis[newx][newy]<<endl;
+			   break;
+		   }
+		   q.push(mp(newx,newy));
+	  }
+
+	  }
+	  if(k==1)
+      {
+         
+	  break;
+      }
+  }
+  
+
+}
