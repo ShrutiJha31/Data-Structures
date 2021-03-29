@@ -1,0 +1,145 @@
+#include<bits/stdc++.h>
+ 
+using namespace std;
+ 
+#define ll long long 
+#define scn(n) scanf("%d",&n)
+#define lscn(n) scanf("%lld",&n)
+#define lpri(n) printf("%lld",n)
+#define pri(n) printf("%d",n)
+#define pln() printf("\n")
+#define priln(n) printf("%d\n",n)
+#define lpriln(n) printf("%lld\n",n)
+#define fr(i,init,n) for(int i=init;i<n;i++)
+#define pb push_back     
+#define mp make_pair
+#define F first
+#define S second
+#define gcd __gcd
+#define inf INT_MAX
+#define ninf INT_MIN
+#define f(v,value) find(v.begin(),v.end(),value)
+#define asc(a,n) sort(a,a+n)
+#define desc(a,n,data_type) sort(a,a+n,greater<data_type>())
+#define vasc(v)  sort(v.begin(),v.end())
+#define vdesc(v,data_type) sort(v.begin(),v.end(),greater<data_type>())
+const int mod = 1e9 + 7;         
+const int N = 1e5 + 4;
+ 
+int nooffac(long long a)
+{
+int c=0;
+for(int i=1;i*i<=a;i++)
+{
+if(a%i==0)
+{
+c++;
+if(a/i!=i)
+c++;
+}
+return c;
+}
+}
+ 
+ll check(ll val)
+{
+    ll k2=val;ll t=0;ll sum=0;
+    val=val-val%5;
+    while(k2>0)
+    { 
+        k2=k2/5;
+         t++;
+        //cout<<"k2"<<k2;
+    }
+    t--;//cout<<t<<" ";
+     ll k1=pow(5,t);
+     //cout<<k1;
+    while(k1>=5)
+    {
+        
+    
+        
+        sum+=val/k1;
+ 
+        k1=k1/5;
+        //cout<<sum<<"@ "<<k1;
+        
+    }
+    //cout<<val<<"sum"<<sum<<" ";
+    return sum;
+}
+ 
+ll bi_search(ll k)
+{
+    ll low=0;
+    ll high=1e12;
+    ll pos;
+    while(high>low)
+    {
+        
+        ll mid=(low+high)/2;
+        //cout<<"mid"<<mid<<" ";
+        if(check(mid)>=k)
+        {
+            pos=mid; //cout<<pos<<" ";
+            high=mid-1;
+        }
+        else
+        low=mid+1;
+    }
+   return pos;
+}
+vector<pair<ll,ll>>adj[100005];
+int main()
+{
+   
+      
+   ll n;
+   lscn(n);
+   ll m;
+   lscn(m);
+   
+   vector<ll>dis(n+1,1e32);
+   vector<ll>vis(n+1,-1);
+   fr(i,0,n+1)
+   vis.pb(-1); 
+   fr(i,0,m)
+   {
+    ll a;ll b;ll c;
+	lscn(a);lscn(b);lscn(c);
+	adj[a].pb({b,c});
+	
+	//cout<<a<<" "<<b<<" "<<cost[a][b]<<endl;
+   }  
+    priority_queue<pair<ll,ll>,vector<pair<ll,ll>>,greater<pair<ll,ll>>>q;ll m_d[n+1]={0};
+    
+
+       q.push({0,1});
+       vis[1]=1;
+       
+       dis[1]=0;
+       while(!q.empty())
+   {
+	   ll curr=q.top().second;
+       ll curr_d=q.top().first;
+	 
+	   q.pop();
+	   
+	   for(auto child:adj[curr])
+	   {
+		if(child.second+dis[curr]<dis[child.first])
+         {
+             m_d[child.first]=max(child.second,m_d[curr]);
+             dis[child.first]=child.second+dis[curr];
+             q.push({dis[child.first],child.first});
+         }
+		}
+   }
+ 
+       
+	     
+
+   
+  // cout<<n;
+   cout<<dis[n]-m_d[n]<<endl;
+}
