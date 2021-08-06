@@ -1,0 +1,50 @@
+class Solution {
+public:
+    int val[1000];
+
+    map<int,vector<int>>adj;
+    void dfs(int root, vector<int>&q)
+    {
+        
+        for(auto itr:adj[root])
+        {
+            
+            
+           
+            if(q[val[itr]]>q[val[root]])
+            {
+                val[itr]=val[root];
+                 dfs(itr,q);
+            }
+           /*
+           cout<<root<<" "<<itr<<endl;
+           cout<<itr<<" "<<val[itr]<<envdl;
+           cout<<endl; 
+           */
+           
+        }
+    }
+    vector<int> loudAndRich(vector<vector<int>>& r, vector<int>& q) {
+        unordered_map<int,int>in;int n=0;
+        for(int i=0;i<r.size();i++)
+        {
+            adj[r[i][0]].push_back(r[i][1]);
+            in[r[i][1]]=1;
+         
+        }
+        n=q.size()-1;
+        
+        for(int i=0;i<=n;i++)
+            val[i]=i;
+        for(int i=0;i<=n;i++)
+        {
+           
+                dfs(i,q);
+        }
+        vector<int>res;
+        cout<<"n"<<n;
+        for(int i=0;i<=n;i++)
+            res.push_back(val[i]);
+        return res;
+    }
+};
