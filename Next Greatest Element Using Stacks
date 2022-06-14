@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& n1, vector<int>& nums2) {
+        
+        vector<int>ans(nums2.size(),-1),ans2;
+       // memset(ans,-1,sizeof(ans));
+        stack<int>st;
+        
+        st.push(0);
+        for(int i=1;i<nums2.size();i++)
+        {
+            while(!st.empty()&&nums2[st.top()]<nums2[i])
+            {
+                ans[st.top()]=nums2[i];
+                st.pop();
+            }
+          
+                st.push(i);
+        }
+        
+        int j=0;
+        for(auto itr:n1)
+        {
+            int k=find(nums2.begin(),nums2.end(),itr)-nums2.begin();
+            ans2.push_back(ans[k]);
+            j=k;
+        }
+        return ans2;
+    }
+};
