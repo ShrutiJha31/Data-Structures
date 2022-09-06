@@ -1,0 +1,61 @@
+class Solution {
+public:
+
+bool solve(vector<vector<char>>&b,int x,int y, int pos, string str,int r,int c)
+{
+     int dx[]={1,1,0,-1,-1,-1,0,1};
+        int dy[]={0,-1,-1,-1,0,1,1,1};
+        if(pos==str.length())
+        return true;
+        for(int i=0;i<8;i++)
+        {
+            int nx =x+dx[i];
+            int ny=y+dy[i];
+            if(nx<r&&nx>=0&&ny<c&&ny>=0&&b[nx][ny]==str[pos])
+            {
+                char ch=b[nx][ny];
+                b[nx][ny]='#';
+                if(solve(b,nx,ny,pos+1,str,r,c)==true)
+                {
+                     b[nx][ny]=ch;
+                return true;
+                }
+                 b[nx][ny]=ch;
+               
+            }
+        }
+        return false;
+}
+	vector<string> wordBoggle(vector<vector<char> >& b, vector<string>& d) {
+	  int r=b.size();
+	  int c=b[0].size();
+	  vector<string>ans;
+	  for(auto itr:d)
+	  {
+	      bool flag=false;
+	      for(int i=0;i<r;i++)
+	      {
+	          for(int j=0;j<c;j++)
+	          {
+	              if(b[i][j]==itr[0])
+	              {
+	                  char ch=b[i][j];
+                      b[i][j]='#';
+	                  if(solve(b,i,j,1,itr,r,c)==true)
+	                  {
+	                        b[i][j]=ch;
+	                      ans.push_back(itr);
+	                      flag=true;
+	                      break;
+	                  }
+	                  b[i][j]=ch;
+	              }
+	              
+	          }
+	          if(flag)
+	          break;
+	      }
+	  }
+	  return ans;
+	}
+};
